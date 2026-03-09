@@ -2,7 +2,7 @@ async function search(){
 
 const query = document.getElementById("query").value;
 
-const res = await fetch("/search",{
+const res = await fetch("http://localhost:3000/search",{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
