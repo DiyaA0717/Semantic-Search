@@ -6,6 +6,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// homepage route
+app.get("/", (req, res) => {
+res.send("Semantic Search Server is Running 🚀");
+});
+
+// search route
 app.post("/search", (req, res) => {
 
 const query = req.body.query;
