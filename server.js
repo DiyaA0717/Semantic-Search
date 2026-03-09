@@ -7,8 +7,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve frontend files
-app.use(express.static(path.join(__dirname, "public")));
+// serve frontend files
+app.use(express.static(__dirname));
+
+// open index.html when visiting /
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 
 app.post("/search", (req, res) => {
 
@@ -32,3 +37,4 @@ res.json(results);
 app.listen(5000, () => {
 console.log("Server running on port 5000");
 });
+
