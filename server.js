@@ -1,24 +1,35 @@
-import express from "express";
-import cors from "cors";
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
 
 const app = express();
+const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
 
+/* Serve frontend files (HTML, CSS, JS) */
+app.use(express.static(__dirname));
+
+/* Root route → open index.html */
 app.get("/", (req, res) => {
-  res.send("API is working 🚀");
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.get("/search", (req, res) => {
-  const query = req.query.q;
+/* Search API */
+app.post("/search", async (req, res) => {
+  try {
+    const query = req.body.query;
 
-  res.json({
-    search: query
-  });
+    // For now just returning query
+    res.send("You searched: " + query);
+
+  } catch (error) {
+    res.status(500).send("Search error");
+  }
 });
-  
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+/* Start Server */
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
