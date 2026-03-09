@@ -7,10 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// serve frontend files
-app.use(express.static(__dirname));
+// serve all static files (HTML, CSS, JS)
+app.use(express.static(path.join(__dirname)));
 
-// open index.html when visiting /
+// default route
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
@@ -37,4 +37,3 @@ res.json(results);
 app.listen(5000, () => {
 console.log("Server running on port 5000");
 });
-
