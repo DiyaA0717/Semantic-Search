@@ -1,17 +1,15 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// homepage route
-app.get("/", (req, res) => {
-res.send("Semantic Search Server is Running 🚀");
-});
+// Serve frontend files
+app.use(express.static(path.join(__dirname, "public")));
 
-// search route
 app.post("/search", (req, res) => {
 
 const query = req.body.query;
